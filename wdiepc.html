@@ -1,0 +1,307 @@
+<head>
+    <title>WhatsDown at IEPC</title>
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <script language="javascript">
+        <!-- hide
+        
+        // Show the MOC Presence popup. After 7 seconds close it. It will stay open if it's being used.
+        // http://msdn.microsoft.com/en-us/library/bb862214
+        var doMOCPresence = function (strCDS) {
+               if (typeof (window.ActiveXObject) != "undefined") {
+                      var e = window.event,
+                             posx = 0,
+                             posy = 0;
+                      if (e.pageX || e.pageY) {
+                             posx = e.pageX;
+                             posy = e.pageY;
+                      }
+                      else {
+                             if (e.clientX || e.clientY) {
+                                   posx = e.clientX + document.body.scrollLeft + document.documentElement.scrollLeft;
+                                   posy = e.clientY + document.body.scrollTop + document.documentElement.scrollTop;
+                             }
+                             else {
+                                   posx = this.offsetLeft;
+                                   posy = this.offsetTop;
+                             }
+                      }
+                      crtlMOCPres.ShowOOUI(strCDS + '@ford.com', 0, posx, posy);
+                      var t = setTimeout("clearMOCPresence()", 7000);
+               }
+        };
+        
+        var clearMOCPresence = function () { try { crtlMOCPres.HideOOUI(); } catch (e) { return; }};
+        
+        
+        if (typeof (window.ActiveXObject) != "undefined") { var crtlMOCPres = new ActiveXObject("Name.NameCtrl"); } //ActiveX Object supported
+        
+        //unhide -->
+
+        /*enter refresh time in "minutes:seconds" Minutes should range from 0 to inifinity. Seconds should range from 0 to 59*/
+        var limit = "1:00";
+        var colour1 = "white", colour2 = "black";
+
+        if (document.images) {
+            var parselimit = limit.split(":");
+            parselimit = parselimit[0] * 60 + parselimit[1] * 1;
+        }
+
+        var refreshFlag = true;
+
+        function beginrefresh() {
+            if (refreshFlag) {
+                if (!document.images)
+                    return;
+                if (parselimit == 1)
+                    window.location.reload();
+                else {
+                    parselimit -= 1;
+                    curmin = Math.floor(parselimit / 60);
+                    cursec = parselimit % 60;
+                    if (curmin != 0)
+                        curtime = curmin + " minutes and " + cursec + " seconds left until page refresh!";
+                    else {
+                        curtime = cursec + " seconds left until page refresh!";
+                        window.status = curtime;
+                        setTimeout("beginrefresh()", 1000);
+                    }
+                }
+            }
+        }
+
+        function PauseToggle() {
+            if (!refreshFlag) {
+                refreshFlag = true;
+                setTimeout("beginrefresh()", 1000);
+                document.getElementById("pbutton").value = "Pause Auto-Refresh";
+                document.getElementById("pbutton").style.backgroundColor = "";
+            }
+            else {
+                refreshFlag = false;
+                window.status = "The Auto-Refresh has been Paused";
+                parselimit = 1;
+                document.getElementById("pbutton").value = "Resume Auto-Refresh";
+                document.getElementById("pbutton").style.backgroundColor = "yellow";
+            }
+        }
+
+        window.onload = beginrefresh;
+
+    </script>
+
+    <STYLE TYPE="text/css">
+        <!--
+        a:link {
+            color: #FFFFFF;
+            text-decoration: underline;
+        }
+
+        a:visited {
+            color: #FFFFFF;
+            text-decoration: none;
+        }
+
+        a:active {
+            color: #FFFFFF;
+            text-decoration: none;
+        }
+
+        a:hover {
+            color: #FFFFCC;
+            text-decoration: underline;
+        }
+
+        .warningb {
+            width: 100%;
+            height: 65;
+            filter: shadow(color=#333333, direction=135);
+            text-shadow: 2px 2px #000000;
+            font-family: Tahoma, san-serif;
+            color: FFFFFF;
+            font-variant: small-caps;
+            font-size: 23pt;
+        }
+
+        .warninghigh {
+            color: red;
+
+            a:link {
+                color: red;
+                text-decoration: none;
+            }
+
+            a:visited {
+                color: red;
+                text-decoration: none;
+            }
+
+            a:active {
+                color: red;
+                text-decoration: none;
+            }
+
+            a:hover {
+                color: #FFFFCC;
+                text-decoration: underline;
+            }
+        }
+
+        .warningmedium {
+            color: yellow;
+
+            a:link {
+                color: yellow;
+                text-decoration: none;
+            }
+
+            a:visited {
+                color: yellow;
+                text-decoration: none;
+            }
+
+            a:active {
+                color: yellow;
+                text-decoration: none;
+            }
+
+            a:hover {
+                color: #FFFFCC;
+                text-decoration: underline;
+            }
+        }
+
+        .warninglow {
+            color: orange;
+
+            a:link {
+                color: #CCCCCC;
+                text-decoration: none;
+            }
+
+            a:visited {
+                color: #CCCCCC;
+                text-decoration: none;
+            }
+
+            a:active {
+                color: #CCCCCC;
+                text-decoration: none;
+            }
+
+            a:hover {
+                color: #FFFFCC;
+                text-decoration: underline;
+            }
+        }
+
+        .warningm {
+            font-family: Tahoma, serif;
+            color: white;
+            font-variant: normal;
+            font-size: 18pt;
+
+        }
+
+        .wd_title {
+            height: 65;
+            text-align: center;
+            filter: shadow(color=#333333, direction=135);
+            text-shadow: 3px 3px #000000;
+            font-family: Tahoma, serif;
+            color: white;
+            font-weight: bold;
+            font-size: 30pt;
+            padding-left: 50pt;
+            padding-right: 50pt;
+        }
+
+        .wd_coltitle {
+            font-family: Tahoma, serif;
+            font-weight: bold;
+            color: white;
+            font-size: 20pt;
+        }
+
+        .wd_small2 {
+            font-family: Tahoma, serif;
+            font-weight: bold;
+            color: white;
+            font-size: 11pt;
+        }
+
+        .wd_small {
+            text-shadow: none;
+            font-family: Arial;
+            color: white;
+            font-size: 11pt;
+        }
+
+        .alert {
+            font: 28px Arial, sans-serif;
+        }
+        -->
+    </STYLE>
+
+</head>
+
+<body bgcolor="#6699CC">
+
+
+    <script language="javascript">
+        document.title = "WhatsDown at IEPC (0)";
+    </script>
+
+    <table width=100%>
+        <tr>
+            <td align="left" valign="middle" style="padding-left: 10px;">
+                <table border="1" bgcolor="white">
+                    <tr>
+                        <td>
+                            <div class="alert">Alerts: 0/0</div>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+            <td align="center" class="wd_title">WhatsDown at IEPC <img src="WUGlogo.png" width="30" height="30"
+                    border="0"> 5/21/2025&nbsp;&nbsp;13:59:18</TD>
+            <td align="right"><button id="pbutton" onclick="PauseToggle()">Pause Auto-Refresh</button></td>
+        </tr>
+        <tr>
+            <td align='center' colspan='3'>
+                <font face='Arial'><A HREF=https://whatsup.irapuato.ford.com>WhatsUp</a>&nbsp;|&nbsp;<A
+                        HREF=default.asp>WhatsDown</a>&nbsp;|&nbsp;<b>Filters:</b> <A
+                        HREF='https://whatsdown.ford.com/whatsdown.asp?PlantCode=IEPC'>Show All</a>, <a
+                        href='https://whatsdown.ford.com/whatsdown.asp?PlantCode=IEPC&Filter=PingOnly'>Ping Only</a>, <a
+                        href='https://whatsdown.ford.com/whatsdown.asp?PlantCode=IEPC&Filter=NoNotes'>No Notes</a>
+            </td>
+        </tr>
+    </table>
+
+
+    <table border="0" class="warningb" cellspacing=10 width="100%" align="center">
+        <tr bgcolor="#000099" class="wd_coltitle" align="center">
+            <td>Group</td>
+            <td>HostName</td>
+            <td>Status</td>
+            <td>Notes</td>
+            <td>Time</td>
+        </tr>
+
+        <tr>
+            <td align='center' colspan='5' class='wd_title'>
+                <font color='#58FA58'>All Clear</font>
+            </td>
+        </tr>
+
+    </table>
+    </font>
+
+    <center>
+        <font color="white" face="arial">
+            <hr>
+            Originally developed by Kentucky Truck Plant
+
+        </font>
+    </center>
+
+</body>
