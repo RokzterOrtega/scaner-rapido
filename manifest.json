@@ -21,7 +21,8 @@
                 "*://whatsdown.ford.com/whatsdown.asp?PlantCode=IEPC*"
             ],
             "js": [
-                "content.js"
+                "content.js",
+                "popup.js"
             ],
             "run_at": "document_end"
         }

@@ -29,21 +29,14 @@ function findAndObserveCell() {
     if (ALRT1 == "Alerts: 0/0") {
 
         console.log("Todo va muy bien :D")
+        alert("Segimos bien" )
+    }
+    else {
 
-        var alarma = document.getElementById("audio");
-
-        audio.play();
-
-    } else {
-
-        alert("CUIDADO !!!! \n Un Dispositivo esta fuera de Linea ")
-        alert(" !!!!!!  SI DESEAS TOMAR EVIDENCIA DE ESTA ALERTA HAZLO DE NO SER ASI CIERRA ESTA ALERTA !!!!!!")
-
-        var alarma = document.getElementById("audio");
-
-        audio.play();
+        alert("!!!! AVISO !!!! \nUn Dispositivo esta fuera de Linea !!!!!!")
 
     }
+
     // Configurar el MutationObserver
     observer = new MutationObserver((mutations) => {
         mutations.forEach((mutation) => {
