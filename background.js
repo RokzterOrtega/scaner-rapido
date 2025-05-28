@@ -13,7 +13,3 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
         });
     }
 });
-/*
-window.onbeforeunload = function (e) {
-    console.log("La pagina se actualizo");
-};*/

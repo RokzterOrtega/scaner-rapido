@@ -1,7 +1,7 @@
 {
     "manifest_version": 3,
     "name": "Ford WD Notificador ",
-    "version": "1.0.5",
+    "version": "2.0",
     "description": "Notifica Cuando existen alertas de Equipos Desconectados al sitio de Whats Down.",
     "permissions": [
         "notifications",
@@ -22,21 +22,19 @@
                 "*://whatsdown.ford.com/whatsdown.asp?PlantCode=IEPC*"
             ],
             "js": [
-                "content.js",
-                "popup.js"
+                "content.js"
             ],
             "run_at": "document_idle"
         }
     ],
-   
-    "web_accessible_resources": [ 
+    "web_accessible_resources": [
         {
             "resources": [
                 "sounds/sound.mp3"
-            ], 
+            ],
             "matches": [
                 "<all_urls>"
-            ] 
+            ]
         }
     ]
 }

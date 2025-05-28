@@ -1,11 +1,11 @@
 // content.js
-
 // !!! MUY IMPORTANTE !!!
 const CELL_SELECTOR = 'td:nth-child(1) tr:nth-child(1)'; // Ejemplo: '#miTabla td:nth-child(0) tr:nth-child(1)'
 
 let targetCell = null;
 let lastKnownValue = null;
 let observer = null;
+
 //Se agrega el sonido de notificacion
 const notificationSoundUrl = chrome.runtime.getURL('sounds/sound.mp3');
 const notificationSound = new Audio(notificationSoundUrl);
@@ -21,22 +21,19 @@ function findAndObserveCell() {
     }
 
     console.log("Monitor de Celda: Elemento encontrado. Iniciando observación.");
-
     // Obtener el valor inicial
     lastKnownValue = targetCell.textContent.trim();
     //console.log("Monitor de Celda: Valor inicial:", lastKnownValue);
     sessionStorage.setItem("AL1", lastKnownValue);
     let ALRT1 = sessionStorage.getItem("AL1");
     //console.log("Dato", ALRT1, "guardado en memoria temporal"); //Se guarda el dato de la celda en la memoria temporal
-
     if (ALRT1 == "Alerts: 0/0") {
 
         console.log("Todo va muy bien :D")
 
     }
     else {
-
-       // alert("!!!! AVISO !!!! \nUn Dispositivo esta fuera de Linea !!!!!!")
+        // alert("!!!! AVISO !!!! \nUn Dispositivo esta fuera de Linea !!!!!!")
         notificationSound.currentTime = 0;
         notificationSound.play().catch(error => {
             // Manejo básico de errores de reproducción (ej. políticas de autoplay del navegador)
