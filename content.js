@@ -6,6 +6,9 @@ const CELL_SELECTOR = 'td:nth-child(1) tr:nth-child(1)'; // Ejemplo: '#miTabla t
 let targetCell = null;
 let lastKnownValue = null;
 let observer = null;
+//Se agrega el sonido de notificacion
+const notificationSoundUrl = chrome.runtime.getURL('sounds/sound.mp3');
+const notificationSound = new Audio(notificationSoundUrl);
 
 function findAndObserveCell() {
     targetCell = document.querySelector(CELL_SELECTOR);
@@ -21,19 +24,25 @@ function findAndObserveCell() {
 
     // Obtener el valor inicial
     lastKnownValue = targetCell.textContent.trim();
-    console.log("Monitor de Celda: Valor inicial:", lastKnownValue);
+    //console.log("Monitor de Celda: Valor inicial:", lastKnownValue);
     sessionStorage.setItem("AL1", lastKnownValue);
     let ALRT1 = sessionStorage.getItem("AL1");
-    console.log("Dato", ALRT1, "guardado en memoria temporal"); //Se guarda el dato de la celda en la memoria temporal
+    //console.log("Dato", ALRT1, "guardado en memoria temporal"); //Se guarda el dato de la celda en la memoria temporal
 
     if (ALRT1 == "Alerts: 0/0") {
 
         console.log("Todo va muy bien :D")
-        alert("Segimos bien" )
+
     }
     else {
 
-        alert("!!!! AVISO !!!! \nUn Dispositivo esta fuera de Linea !!!!!!")
+       // alert("!!!! AVISO !!!! \nUn Dispositivo esta fuera de Linea !!!!!!")
+        notificationSound.currentTime = 0;
+        notificationSound.play().catch(error => {
+            // Manejo básico de errores de reproducción (ej. políticas de autoplay del navegador)
+            console.warn("Monitor de Celda: No se pudo reproducir el sonido de notificación.", error);
+            console.warn("Esto puede ocurrir si el usuario no ha interactuado con la página.");
+        });
 
     }
 
@@ -74,6 +83,7 @@ function findAndObserveCell() {
     });
 
     console.log("Monitor de Celda: Observador iniciado.");
+    console.log("El monitoreo Alertara en caso de un cambio en el refresh de la pagina o en caso de actualizacion de datos");
 
     // Opcional: Envía un mensaje inicial al background para confirmar que la observación ha empezado
     chrome.runtime.sendMessage({

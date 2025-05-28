@@ -4,7 +4,8 @@
     "version": "1.0.5",
     "description": "Notifica Cuando existen alertas de Equipos Desconectados al sitio de Whats Down.",
     "permissions": [
-        "notifications"
+        "notifications",
+        "storage"
     ],
     "background": {
         "service_worker": "background.js"
@@ -24,7 +25,18 @@
                 "content.js",
                 "popup.js"
             ],
-            "run_at": "document_end"
+            "run_at": "document_idle"
+        }
+    ],
+   
+    "web_accessible_resources": [ 
+        {
+            "resources": [
+                "sounds/sound.mp3"
+            ], 
+            "matches": [
+                "<all_urls>"
+            ] 
         }
     ]
 }
