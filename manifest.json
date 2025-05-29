@@ -1,7 +1,7 @@
 {
     "manifest_version": 3,
     "name": "Ford WD Notificador ",
-    "version": "2.0",
+    "version": "2.5.1",
     "description": "Notifica Cuando existen alertas de Equipos Desconectados al sitio de Whats Down.",
     "permissions": [
         "notifications",
