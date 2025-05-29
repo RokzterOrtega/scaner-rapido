@@ -5,7 +5,8 @@
     "description": "Notifica Cuando existen alertas de Equipos Desconectados al sitio de Whats Down.",
     "permissions": [
         "notifications",
-        "storage"
+        "storage",
+        "activeTab"
     ],
     "background": {
         "service_worker": "background.js"

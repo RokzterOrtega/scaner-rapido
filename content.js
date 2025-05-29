@@ -37,8 +37,9 @@ function findAndObserveCell() {
         notificationSound.currentTime = 0;
         notificationSound.play().catch(error => {
             // Manejo básico de errores de reproducción (ej. políticas de autoplay del navegador)
-            console.warn("Monitor de Celda: No se pudo reproducir el sonido de notificación.", error);
-            console.warn("Esto puede ocurrir si el usuario no ha interactuado con la página.");
+            //console.warn("Monitor de Celda: No se pudo reproducir el sonido de notificación.", error);
+            //console.warn("Esto puede ocurrir si el usuario no ha interactuado con la página.");}
+            console.log("El sonido no se pudo reproducir por politicas del navegador")
         });
 
     }
@@ -80,7 +81,7 @@ function findAndObserveCell() {
     });
 
     console.log("Monitor de Celda: Observador iniciado.");
-    console.log("El monitoreo Alertara en caso de un cambio en el refresh de la pagina o en caso de actualizacion de datos");
+    //console.log("El monitoreo Alertara en caso de un cambio en el refresh de la pagina o en caso de actualizacion de datos");
 
     // Opcional: Envía un mensaje inicial al background para confirmar que la observación ha empezado
     chrome.runtime.sendMessage({
